@@ -1,0 +1,211 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #FFFFFF;
+    min-height: 100vh;
+    background: #000000 ;
+    display: flex;
+}
+
+.container{
+    width: 100%; 
+    border: 2px solid #990000;
+    margin: 20px;
+    padding:30px;
+    background:linear-gradient(45deg,#300000,#000000 20%,#300000,#000000 80%);
+    background-size: 600%;  
+    animation: color 20s reverse infinite;
+    position: relative;
+    }
+
+@keyframes color{
+    0%{
+       background-position: 0 50%;
+      }
+     50%{
+       background-position: 100% 50%;
+      }
+     100%{
+       background-position: 0 50%;
+      }
+}
+.layout-1{
+    width: 10%;
+    height: 30%;
+    border-top: 20px solid #990000;
+    border-left: 20px solid #990000;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    
+}
+
+.layout-2{
+    width: 10%;
+    height: 30%;
+    border-bottom:20px solid #990000;
+    border-right: 20px solid #990000;
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+}
+
+header {
+    /* height: 120px; */
+    display: flex;
+    justify-content: space-between;		
+}
+
+.titre {
+     margin-left: 30px;
+     font-weight: bold;
+     font-size: 25px;
+     line-height: 10px;	
+}
+
+.titre p {	
+     color: #990000;		
+}
+
+.contact {
+     width: 40%;
+     display: inline-flex;
+     justify-content: flex-end;
+     align-items: center;
+     text-align: end;
+     border-bottom: 2px solid #990000;
+}
+
+.contact img {
+    width: 50%;
+    margin-left: 20px;
+}
+
+
+main { 
+     display:inline-flex;
+     justify-content: space-around;
+     align-items: center;
+     width: 100%;
+     
+}
+ 
+section {
+	/* border-left: 2px solid #990000; */
+	padding-left: 30px;
+    padding-top: 55px;
+    max-height: 60vh;
+    overflow: hidden;
+} 
+
+section h2 {
+	text-decoration: underline;
+	text-decoration-thickness: 2px;   
+}
+
+section p {
+    font-size: 14px;
+	
+}
+
+.Boite{
+    background-color: #990000;
+    height: 600px;
+    
+}
+
+.Boite img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover; /* Cette propriété assure que l'image couvre toute la zone sans déformer ses proportions */
+    object-position: center -280px;
+}
+
+nav {
+    border-top: 2px solid #990000;
+    margin-top: 20px; /* Ajoute une marge en haut pour espacer le nav du reste de la page */
+}
+
+.contact {
+    border-bottom: 2px solid #990000;
+    margin-bottom: 20px; /* Ajoute une marge en bas pour espacer le contact du reste de la page */
+}
+
+
+nav {
+	border-top: 2px solid #990000;
+	border-left: 2px solid #990000;
+	width: 15%;
+	margin-right: 150px;
+	padding-left: 50px;
+	position: relative;
+	left: 100px;
+		
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-around;
+	height: 200px;
+	width: 100px;
+	flex-direction: column;	
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+nav li {
+	list-style: none;	
+}
+
+nav li a {
+	color: white;
+    font-size: 14px ;
+}
+
+@media (max-width: 936px) {
+
+    .titre h1::before {
+        content: "J.F";
+        font-size: 30px; 
+    }
+    .titre p {
+        content: "Développeur Web & Application mobile";
+        font-size: 10px;
+    }
+    .titre h1 {
+        font-size: 0; /* Cela rendra le texte original de h1 invisible */
+    }
+}
+@media (max-width: 420px) {
+
+    .layout-2 {
+        display: none;
+    }
+    main {
+        display: flex;
+        flex-direction: column;
+        
+
+    }
+    .Boite {
+        display: none;
+    }
+    body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            margin: 0; /* Supprime les marges par défaut */
+        }
+        nav {
+            border: none;
+            width: 50%;
+            text-align: center;
+            padding: 0;
+        }
+        section p {
+            padding-bottom: 40px;
+            border-bottom: 1px solid #990000;
+        }
+}
