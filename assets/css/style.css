@@ -14,7 +14,7 @@ body {
     border: 2px solid #990000;
     margin: 20px;
     padding: 30px;
-    background: linear-gradient(45deg, #300000, #000000 20%, #300000, #000000 80%);
+    background: linear-gradient(45deg, #300000,rgb(6, 31, 67), #000000 20%, #300000,rgb(6, 31, 67), #000000 80%);
     background-size: 600%;
     animation: color 20s reverse infinite;
     position: relative;
