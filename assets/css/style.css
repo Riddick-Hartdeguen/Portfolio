@@ -223,5 +223,7 @@ nav li a {
     section p {
         padding-bottom: 40px;
         border-bottom: 1px solid #990000;
+        border-image: linear-gradient(25deg, #072642, #5f051b);
+        border-image-slice: 1;
     }
 }
