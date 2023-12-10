@@ -94,7 +94,7 @@ header {
     text-align: end;
     border-bottom: 2px solid #990000;
     margin-bottom: 20px;
-    border-image: linear-gradient(25deg, #072642, #5f051b);
+    border-image: linear-gradient(90deg, rgba(36,0,0,1) 16%, rgba(121,9,26,1) 51%, rgba(41,4,4,1) 100%);
     border-image-slice: 1;
 }
 
@@ -235,7 +235,7 @@ nav li a {
     section p {
         padding-bottom: 40px;
         border-bottom: 1px solid #990000;
-        border-image: linear-gradient(25deg, #072642, #5f051b);
+        border-image:linear-gradient(90deg, rgba(36,0,0,1) 16%, rgba(121,9,26,1) 51%, rgba(41,4,4,1) 100%);
         border-image-slice: 1;
     }
 }
