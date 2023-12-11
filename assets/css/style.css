@@ -13,7 +13,7 @@ body {
 .container {
     width: 100%;
     border: 2px solid #990000;
-    border-image: linear-gradient(90deg, rgba(36,0,0,1) 16%, rgba(121,9,26,1) 51%, rgba(41,4,4,1) 100%);
+    border-image:linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
     border-image-slice: 1;
     margin: 20px;
     padding: 30px;
@@ -45,9 +45,9 @@ body {
 .layout-1 {
     width: 10%;
     height: 30%;
-    border-top: 20px solid #990000;
-    border-left: 20px solid #990000;
-    border-image: linear-gradient(90deg, rgba(36,0,0,1) 16%, rgba(121,9,26,1) 51%, rgba(41,4,4,1) 100%);
+    border-top: 20px solid;
+    border-left: 20px solid;
+    border-image:linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
     border-image-slice: 1;
     position: absolute;
     top: -10px;
@@ -58,9 +58,9 @@ body {
 .layout-2 {
     width: 10%;
     height: 30%;
-    border-bottom: 20px solid #990000;
-    border-image: linear-gradient(90deg, rgba(36,0,0,1) 16%, rgba(121,9,26,1) 51%, rgba(41,4,4,1) 100%);
-    border-right: 20px solid #990000;
+    border-bottom: 20px solid;
+    border-image: linear-gradient(45deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
+    border-right: 20px solid;
     border-image-slice: 1;
     position: absolute;
     bottom: -10px;
