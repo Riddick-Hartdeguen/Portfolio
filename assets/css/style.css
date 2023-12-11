@@ -83,14 +83,18 @@ header {
     margin-left: 0px;
     font-weight: bold;
     font-size: 25px;
-    line-height: 10px;
+    line-height: 1px;
     color: rgb(188, 188, 188);
     font-family: 'Roboto Mono', monospace;
 
 }
 
 .titre p {
-    color: #530303;
+    background: linear-gradient(180deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height:1;
 }
 
 .contact {
