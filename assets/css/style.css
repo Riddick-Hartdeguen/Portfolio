@@ -207,6 +207,12 @@ nav li a {
         font-size: 0;
         /* Cela rendra le texte original de h1 invisible */
     }
+    .row {
+        
+padding: 30px;
+       
+    }
+    
 
 }
 
@@ -224,9 +230,9 @@ nav li a {
         max-width: 100%;
     }
 
-    section img {
+    /* section img {
         display: none;
-    }
+    } */
 
     nav {
         text-align: center;
