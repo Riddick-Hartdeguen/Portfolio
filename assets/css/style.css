@@ -257,3 +257,12 @@ padding: 30px;
         border-image-slice: 1;
     }
 }
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
