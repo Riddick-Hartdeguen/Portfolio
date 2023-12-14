@@ -9,8 +9,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&family=Roboto+Mono:wght@500&display=swap"
 		rel="stylesheet">
-
 	<title>portfolio</title>
+	<script src="script.js"></script>
 </head>
 
 <body>
@@ -34,8 +34,9 @@
 
 			<main>
 				<section>
-					<h2>Bienvenue</h2>
-					<p>C'est avec plaisir que je vous accueil dans mon royaume numérique ! Ici, vous êtes invités à
+					<h2 id="titreh2">Bienvenue</h2>
+					<p id="textep">C'est avec plaisir que je vous accueil dans mon royaume numérique ! Ici, vous êtes
+						invités à
 						explorer
 						un monde où le code se transforment en site web élégants et en applications mobiles
 						fonctionnelles
@@ -47,12 +48,12 @@
 						voûte de
 						chaque ligne de code que je rédige.
 					</p>
-					<img src="/images/villedenuit1.jpg" alt="Ville de nuit">
+					<img id="monImage" src="/images/villedenuit1.jpg" alt="Ville de nuit">
 				</section>
 				<nav>
 					<ul>
-						<li><a href="index.html">Accueil</a></li>
-						<li><a href="presentation.html">Présentation</a></li>
+						<li><a href="#" onclick="changeindex(event)">Accueil</a></li>
+						<li><a href="#" onclick="changeContent(event)">Présentation</a></li>
 						<li><a href="competences.html">Compétences</a></li>
 						<li><a href="projets.html">Projets</a></li>
 					</ul>
