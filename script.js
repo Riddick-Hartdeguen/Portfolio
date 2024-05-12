@@ -46,5 +46,3 @@ function changeindex(event) {
     imageElement.classList.add("fadeIn");
     },0.1);
 }
-
-
