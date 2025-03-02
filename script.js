@@ -1,41 +1,55 @@
-function changeContent(event) {
-    event.preventDefault();
-    var textElement = document.getElementById("textep");
-    textElement.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.Suspendisse in mauris id ipsum imperdiet cursus. Nunc a nulla euismod nisl congue cursus. Etiam venenatis nunc elit, et sollicitudin magna facilisis eget. Maecenas tortor sapien, laoreet id accumsan sed, egestas sed ipsum. Integer id turpis eget metus fringilla gravida nec eget erat. Pellentesque in blandit ipsum. Vivamus mi ipsum, eleifend sit amet faucibus in, commodo et velit. Cras ut luctus dolor, suscipit auctor turpis.";
-    textElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    textElement.classList.add("fadeIn");
-    },0.1);
-    var titreElement = document.getElementById("titreh2");
-    titreElement.textContent = "Présentation";
-    titreElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    titreElement.classList.add("fadeIn");
-    },0.1);
-    var imageElement = document.getElementById("monImage");
-    imageElement.src = "images/liberté.jpg";
-    imageElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    imageElement.classList.add("fadeIn");
-    },0.1);
-}
-function changeindex(event) {
-    event.preventDefault();
-    var textElement = document.getElementById("textep");
-    textElement.innerHTML = "C'est avec plaisir que je vous accueil dans mon royaume numérique ! Ici, vous êtes invités à explorer un monde où le code se transforment en site web élégants et en applications mobiles fonctionnelles.<br />Mon portfolio est un laboratoire d'idée numériques,où je fusionne habilement la technologie et la créativité pour donner naissance à des projets uniques.Laissez-vous immerger dans cet univers, où l'innovation est la clé de voûte de chaque ligne de code que je rédige.";
-    textElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    textElement.classList.add("fadeIn");
-    },0.1);
-    var titreElement = document.getElementById("titreh2");
-    titreElement.textContent = "Bienvenue";
-    titreElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    titreElement.classList.add("fadeIn");
-    },0.1);
-    var imageElement = document.getElementById("monImage");
-    imageElement.src = "images/villedenuit1.jpg";
-    imageElement.classList.remove("fadeIn");
-    setTimeout(function () {
-    imageElement.classList.add("fadeIn");
-    },0.1);}
+document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('nav ul li a');
+    links.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const section = link.textContent.trim();
+            const title = document.getElementById('titreh2');
+            const image = document.getElementById('monImage');
+
+            // Ajouter la classe fade-out au titre
+            title.classList.add('fade-out');
+
+            // Attendre la fin de l'animation fade-out avant de changer le texte et d'ajouter fade-in
+            title.addEventListener('animationend', function handleTitleAnimationEnd() {
+                title.textContent = section;
+
+                // Retirer la classe fade-out et ajouter la classe fade-in
+                title.classList.remove('fade-out');
+                title.classList.add('fade-in');
+
+                // Retirer la classe fade-in après l'animation
+                title.addEventListener('animationend', function removeTitleFadeIn() {
+                    title.classList.remove('fade-in');
+                    title.removeEventListener('animationend', removeTitleFadeIn);
+                });
+
+                title.removeEventListener('animationend', handleTitleAnimationEnd);
+            });
+
+            // Ajouter la classe fade-out à l'image
+            image.classList.add('fade-out');
+
+            // Attendre la fin de l'animation fade-out avant de changer l'image et d'ajouter fade-in
+            image.addEventListener('animationend', function handleImageAnimationEnd() {
+                if (section === 'Présentation') {
+                    image.src = 'images/liberté.jpg';
+                } else {
+                    image.src = '/images/villedenuit1.jpg'; // Remettre l'image par défaut pour les autres sections
+                }
+
+                // Retirer la classe fade-out et ajouter la classe fade-in
+                image.classList.remove('fade-out');
+                image.classList.add('fade-in');
+
+                // Retirer la classe fade-in après l'animation
+                image.addEventListener('animationend', function removeImageFadeIn() {
+                    image.classList.remove('fade-in');
+                    image.removeEventListener('animationend', removeImageFadeIn);
+                });
+
+                image.removeEventListener('animationend', handleImageAnimationEnd);
+            });
+        });
+    });
+});
