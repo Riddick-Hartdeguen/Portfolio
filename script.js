@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const title = document.getElementById('titreh2');
             const paragraph = document.getElementById('textep');
             const image = document.getElementById('monImage');
+            const projetsLiens = document.getElementById('projetsLiens');
             let paragraphText = `C'est avec plaisir que je vous accueille dans mon royaume numérique ! Ici, vous êtes
                 invités à explorer un monde où le code se transforme en sites web élégants et en applications
                 mobiles fonctionnelles.
@@ -54,6 +55,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     que développeur web, étape par étape.`;
                 imageSource = 'images/liberté.jpg';
                 imageDescription = 'Image de présentation des projets';
+            }
+
+            // Le bloc de liens projets n'a de sens que dans la section Projets.
+            // Sur Accueil et Competences, on le cache pour garder une page plus simple.
+            if (section === 'Projets') {
+                projetsLiens.classList.add('visible');
+            } else {
+                projetsLiens.classList.remove('visible');
             }
 
             // Ajouter la classe fade-out au titre
