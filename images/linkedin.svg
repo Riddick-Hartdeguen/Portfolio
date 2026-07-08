@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="60" height="60" aria-hidden="true">
+  <defs>
+    <mask id="linkedin-cutout">
+      <rect width="256" height="256" fill="white"/>
+      <circle cx="82" cy="84" r="12" fill="black"/>
+      <rect x="70" y="114" width="24" height="70" rx="3" fill="black"/>
+      <path fill="black" d="M112 114h24v10c6-8 15-12 26-12 21 0 32 14 32 39v33h-24v-31c0-14-6-20-17-20-12 0-20 8-20 22v29h-21z"/>
+    </mask>
+  </defs>
+  <rect x="36" y="36" width="184" height="184" rx="30" fill="#c02626" mask="url(#linkedin-cutout)"/>
+</svg>
