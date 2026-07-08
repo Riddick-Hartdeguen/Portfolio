@@ -233,6 +233,62 @@ section img {
 }
 
 /* Fin de la section Présentation */
+/* Liens affiches uniquement dans la section Projets */
+.projets-liens {
+    display: none;
+    width: 230px;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    /* Valeur simple pour regler facilement la hauteur des cartes.
+       Plus le nombre est petit, plus les cartes remontent. */
+    top: 50px;
+    /* Decale les cartes vers la gauche pour les placer entre l'image et la nav.
+       Plus le nombre est grand, plus les cartes vont vers la gauche. */
+    right: 190px;
+}
+
+.projets-liens.visible {
+    display: flex;
+    animation: fadeInUp 0.35s ease forwards;
+}
+
+.projet-lien {
+    flex: 1;
+    padding: 16px;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    border: 1px solid rgba(153, 0, 0, 0.45);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+}
+
+.projet-lien:hover,
+.projet-lien:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(153, 0, 0, 0.9);
+    background: rgba(153, 0, 0, 0.14);
+    outline: none;
+}
+
+.projet-lien strong,
+.projet-lien span {
+    display: block;
+}
+
+.projet-lien strong {
+    margin-bottom: 6px;
+    color: rgb(188, 188, 188);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+}
+
+.projet-lien span {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
 /* Section barre de navigation */
 
 nav {
@@ -306,6 +362,18 @@ nav li a:focus-visible::before {
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .fade-out {
