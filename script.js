@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Cette liste sert uniquement a precharger les images importantes du site.
-    // Le navigateur les met en memoire des le debut, ce qui evite un petit saut
-    // au premier clic sur "Accueil", "Competences" ou "Projets".
+    // ==============================
+    // 1. Images a precharger
+    // ==============================
+    // Cette liste sert uniquement a charger les images importantes avant les clics.
+    // Comme ca, le navigateur les connait deja quand on change de section.
     const imagesAPrecharger = [
         'images/villedenuit1.jpg',
         'images/competences-v2.png',
@@ -15,75 +17,102 @@ document.addEventListener('DOMContentLoaded', function () {
         imagePrechargee.src = sourceImage;
     });
 
-    const links = document.querySelectorAll('nav ul li a');
-    links.forEach(link => {
-        link.addEventListener('click', function (event) {
+    // ==============================
+    // 2. Elements HTML utilises par le script
+    // ==============================
+    // On les recupere une seule fois au chargement de la page.
+    // Comme ils existent deja dans le HTML, il est inutile de les chercher a chaque clic.
+    const liensNavigation = document.querySelectorAll('nav ul li a');
+    const titre = document.getElementById('titreh2');
+    const paragraphe = document.getElementById('textep');
+    const image = document.getElementById('monImage');
+    const liensProjets = document.getElementById('projetsLiens');
+
+    // ==============================
+    // 3. Textes et images des sections
+    // ==============================
+    // Le texte d'accueil vient directement du HTML.
+    // Ca evite d'avoir le meme texte ecrit deux fois dans le projet.
+    const texteAccueil = paragraphe.innerHTML;
+    const imageAccueil = 'images/villedenuit1.jpg';
+    const descriptionAccueil = image.alt;
+
+    // Les textes plus longs sont sortis du clic pour alleger la lecture.
+    // Au moment du clic, on choisira simplement lequel afficher.
+    const texteCompetences = `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
+        en train d'apprivoiser pour construire des projets plus complets.
+        <br />
+        Je consolide les bases avec HTML, CSS et JavaScript, puis j'avance vers TypeScript, React,
+        Node.js, Express, MongoDB, Git, GitHub et les outils liés à l'IA comme Codex.`;
+
+    const texteProjets = `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
+        deviennent des interfaces, des essais, puis de vraies réalisations.
+        <br />
+        Chaque projet me permet de pratiquer, de corriger mes erreurs et de montrer mon évolution en tant
+        que développeur web, étape par étape.`;
+
+    // ==============================
+    // 4. Clics sur la navigation
+    // ==============================
+    liensNavigation.forEach(function (lien) {
+        lien.addEventListener('click', function (event) {
             event.preventDefault();
-            const section = link.textContent.trim();
+
+            const section = lien.textContent.trim();
+
             // Dans la nav, "Accueil" est plus naturel.
             // A l'ecran, on garde "Bienvenue" comme titre de la premiere section.
-            const titleText = section === 'Accueil' ? 'Bienvenue' : section;
-            const title = document.getElementById('titreh2');
-            const paragraph = document.getElementById('textep');
-            const image = document.getElementById('monImage');
-            const projetsLiens = document.getElementById('projetsLiens');
-            let paragraphText = `C'est avec plaisir que je vous accueille dans mon royaume numérique ! Ici, vous êtes
-                invités à explorer un monde où le code se transforme en sites web élégants et en applications
-                mobiles fonctionnelles.
-                <br />
-                Mon portfolio est un laboratoire d'idées numériques, où je fusionne la technologie et la
-                créativité pour donner naissance à des projets uniques. Laissez-vous immerger dans cet univers,
-                où l'innovation est la clé de voûte de chaque ligne de code que je rédige.`;
-            let imageSource = 'images/villedenuit1.jpg';
-            let imageDescription = 'Ville de nuit';
+            let texteTitre = section;
+
+            if (section === 'Accueil') {
+                texteTitre = 'Bienvenue';
+            }
+
+            // Par defaut, on prepare le contenu de l'accueil.
+            // Si la section cliquee est differente, les if / else juste en dessous remplacent ces valeurs.
+            let texteParagraphe = texteAccueil;
+            let sourceImage = imageAccueil;
+            let descriptionImage = descriptionAccueil;
 
             // Chaque section garde un contenu simple : un titre, un court texte et une image.
             // Cela permet de comprendre facilement ce qui change au clic dans la navigation.
             if (section === 'Compétences') {
-                paragraphText = `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
-                    en train d'apprivoiser pour construire des projets plus complets.
-                    <br />
-                    Je consolide les bases avec HTML, CSS et JavaScript, puis j'avance vers TypeScript, React,
-                    Node.js, Express, MongoDB, Git, GitHub et les outils liés à l'IA comme Codex.`;
-                imageSource = 'images/competences-v2.png';
-                imageDescription = 'Logos des compétences web, full stack et IA';
+                texteParagraphe = texteCompetences;
+                sourceImage = 'images/competences-v2.png';
+                descriptionImage = 'Logos des compétences web, full stack et IA';
             } else if (section === 'Projets') {
-                paragraphText = `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
-                    deviennent des interfaces, des essais, puis de vraies réalisations.
-                    <br />
-                    Chaque projet me permet de pratiquer, de corriger mes erreurs et de montrer mon évolution en tant
-                    que développeur web, étape par étape.`;
-                imageSource = 'images/liberté.jpg';
-                imageDescription = 'Image de présentation des projets';
+                texteParagraphe = texteProjets;
+                sourceImage = 'images/liberté.jpg';
+                descriptionImage = 'Image de présentation des projets';
             }
 
             // Le bloc de liens projets n'a de sens que dans la section Projets.
             // Sur Accueil et Competences, on le cache pour garder une page plus simple.
             if (section === 'Projets') {
-                projetsLiens.classList.add('visible');
+                liensProjets.classList.add('visible');
             } else {
-                projetsLiens.classList.remove('visible');
+                liensProjets.classList.remove('visible');
             }
 
             // Ajouter la classe fade-out au titre
-            title.classList.add('fade-out');
+            titre.classList.add('fade-out');
 
             // Attendre la fin de l'animation fade-out avant de changer le texte et d'ajouter fade-in
-            title.addEventListener('animationend', function handleTitleAnimationEnd() {
-                title.textContent = titleText;
-                paragraph.innerHTML = paragraphText;
+            titre.addEventListener('animationend', function handleTitleAnimationEnd() {
+                titre.textContent = texteTitre;
+                paragraphe.innerHTML = texteParagraphe;
 
                 // Retirer la classe fade-out et ajouter la classe fade-in
-                title.classList.remove('fade-out');
-                title.classList.add('fade-in');
+                titre.classList.remove('fade-out');
+                titre.classList.add('fade-in');
 
                 // Retirer la classe fade-in après l'animation
-                title.addEventListener('animationend', function removeTitleFadeIn() {
-                    title.classList.remove('fade-in');
-                    title.removeEventListener('animationend', removeTitleFadeIn);
+                titre.addEventListener('animationend', function removeTitleFadeIn() {
+                    titre.classList.remove('fade-in');
+                    titre.removeEventListener('animationend', removeTitleFadeIn);
                 });
 
-                title.removeEventListener('animationend', handleTitleAnimationEnd);
+                titre.removeEventListener('animationend', handleTitleAnimationEnd);
             });
 
             // On retire d'abord les anciennes classes pour repartir d'une animation propre.
@@ -96,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 const nouvelleImage = new Image();
 
                 nouvelleImage.addEventListener('load', function () {
-                    image.src = imageSource;
-                    image.alt = imageDescription;
+                    image.src = sourceImage;
+                    image.alt = descriptionImage;
 
                     image.classList.remove('fade-out');
                     image.classList.add('fade-in');
@@ -107,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }, 300);
                 });
 
-                nouvelleImage.src = imageSource;
+                nouvelleImage.src = sourceImage;
             }, 300);
         });
     });
