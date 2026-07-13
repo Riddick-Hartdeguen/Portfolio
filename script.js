@@ -23,8 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // On les recupere une seule fois au chargement de la page.
     // Comme ils existent deja dans le HTML, il est inutile de les chercher a chaque clic.
     const liensNavigation = document.querySelectorAll('nav ul li a');
+    const sectionPrincipale = document.getElementById('section');
     const titre = document.getElementById('titreh2');
     const paragraphe = document.getElementById('textep');
+    const zoneLecture = document.querySelector('.zone-lecture');
     const image = document.getElementById('monImage');
     const liensProjets = document.getElementById('projetsLiens');
 
@@ -94,6 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 liensProjets.classList.remove('visible');
             }
 
+            // Cette valeur sera utilisée après le fondu, en même temps que le nouveau texte.
+            // Cela évite que le long texte d'accueil change brièvement la hauteur de la section.
+            const estAccueil = section === 'Accueil';
+
             // Ajouter la classe fade-out au titre
             titre.classList.add('fade-out');
 
@@ -101,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function () {
             titre.addEventListener('animationend', function handleTitleAnimationEnd() {
                 titre.textContent = texteTitre;
                 paragraphe.innerHTML = texteParagraphe;
+
+                // Le texte et sa mise en page changent ensemble une fois le fondu terminé.
+                // Il n'existe donc plus d'instant où le texte d'accueil est affiché sans sa zone fixe.
+                sectionPrincipale.classList.toggle('accueil', estAccueil);
+                zoneLecture.scrollTop = 0;
 
                 // Retirer la classe fade-out et ajouter la classe fade-in
                 titre.classList.remove('fade-out');
