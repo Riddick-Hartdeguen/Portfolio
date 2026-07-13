@@ -1,115 +1,84 @@
+/* Styles globaux */
 
 html,
 body {
     width: 100%;
     height: 100%;
-    /* Le body reste bloque a la taille de la fenetre pour eviter
-       une barre de scroll globale inutile. */
     overflow: hidden;
 }
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    color: #FFFFFF;
+    padding: 10px;
     min-height: 100vh;
-    background: #000000;
-    display: flex;
-    font-family: 'Manrope', sans-serif;
     max-height: 100vh;
-    
+    box-sizing: border-box;
+    display: flex;
+    color: #FFFFFF;
+    background: #000000;
+    font-family: 'Manrope', sans-serif;
 }
 
+/* Layout principal */
+
 .container {
-    width: calc(100vw - 48px);
-    height: calc(100vh - 48px);
-    border: 2px solid #990000;
-    border-image:linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
-    border-image-slice: 1;
-    margin: 10px;
+    width: 100%;
+    height: 100%;
     padding: 12px;
+    box-sizing: border-box;
+    overflow: visible;
+    position: relative;
+    border: 2px solid #990000;
+    border-image: linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
+    border-image-slice: 1;
     background: linear-gradient(45deg, #300000, rgb(6, 31, 67), #000000 20%, #300000, rgb(6, 31, 67), #000000 80%);
     background-size: 600%;
     animation: color 20s reverse infinite;
-    /* Les angles decoratifs (.layout-1 et .layout-2) depassent volontairement
-       du cadre. overflow: visible permet de les afficher au lieu de les couper. */
-    overflow: visible;
-    position: relative;
-
-
-    
 }
 
 .row {
-    width: calc(100% - 60px);
-    height: calc(100% - 2px);
-    padding-left: 30px;
-    padding-bottom: 1px;
-    padding-top: 1px;
-    padding-right: 30px;
+    width: 100%;
+    height: 100%;
+    padding: 1px 30px;
+    box-sizing: border-box;
     display: grid;
     grid-template-rows: auto minmax(0, 1fr) auto;
     overflow: hidden;
-    /* z-index fonctionne avec un element positionne.
-       .row reste derriere les angles decoratifs pour ne pas les cacher. */
     position: relative;
     z-index: 1;
 }
 
-@keyframes color {
-    0% {
-        background-position: 0 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0 50%;
-    }
-}
-
 .layout-1 {
-    /* Angle decoratif volontairement discret :
-       largeur/hauteur plus petites et bordure plus fine pour un rendu minimaliste. */
     width: min(7%, 80px);
     height: min(18%, 130px);
-    border-top: 8px solid;
-    border-left: 8px solid;
-    border-image:linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
-    border-image-slice: 1;
     position: absolute;
-    opacity: 1;
-    filter: drop-shadow(0 0 6px rgba(153, 0, 0, 0.22));
-    /* Les bordures du layout font 8px : avec -4px, on decale de la moitie.
-       opacity: 1 evite de voir le trait du container a travers. */
     top: -5px;
     left: -5px;
-    /* z-index: 2 place cet angle au-dessus du contenu de .row. */
     z-index: 2;
-
+    border-top: 8px solid;
+    border-left: 8px solid;
+    border-image: linear-gradient(75deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
+    border-image-slice: 1;
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(153, 0, 0, 0.22));
 }
 
 .layout-2 {
-    /* Meme style que layout-1 pour garder une symetrie visuelle propre. */
     width: min(7%, 80px);
     height: min(18%, 130px);
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    z-index: 2;
+    border-right: 8px solid;
     border-bottom: 8px solid;
     border-image: linear-gradient(45deg, rgba(121,9,26,1) 0%, rgba(36,0,0,1) 25%, rgba(52,2,5,1) 45%, rgba(121,9,26,1) 85%);
-    border-right: 8px solid;
     border-image-slice: 1;
-    position: absolute;
     opacity: 1;
     filter: drop-shadow(0 0 6px rgba(153, 0, 0, 0.22));
-    /* Meme logique que layout-1 : -4px correspond a la moitie
-       de l'epaisseur de bordure de 8px. */
-    bottom: -5px;
-    right: -5px;
-    /* z-index: 2 place cet angle au-dessus du contenu de .row. */
-    z-index: 2;
 }
+
+/* Header */
 
 header {
     display: flex;
@@ -118,44 +87,44 @@ header {
 
 .titre {
     margin-left: 0px;
-    font-weight: bold;
-    font-size: 25px;
-    line-height: 1px;
     color: rgb(188, 188, 188);
     font-family: 'Roboto Mono', monospace;
-
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 1px;
 }
 
 .titre p {
-    /* margin-left reste a 0 pour que le D commence au meme axe que le J du h1. */
-    margin: 2px 0 0 ;
+    margin: 2px 0 0;
+    color: transparent;
     background: linear-gradient(180deg, rgba(210, 45, 58, 1) 0%, rgba(121, 9, 26, 1) 48%, rgba(178, 31, 45, 1) 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
     font-size: 15px;
     line-height: 1.4;
 }
 
+/* Contact */
+
 .contact {
     width: min(40%, 320px);
     display: inline-flex;
-    gap: 18px;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
+    gap: 18px;
+    padding-bottom: 14px;
     text-align: end;
     border-bottom: 2px solid #990000;
-    padding-bottom: 14px;
     border-image: linear-gradient(90deg, rgba(36, 0, 0, 1) 16%, rgba(121, 9, 26, 1) 51%, rgba(41, 4, 4, 1) 100%);
     border-image-slice: 1;
 }
 
 .contact a {
+    width: 38px;
+    height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.03);
@@ -183,8 +152,20 @@ header {
     filter: opacity(100%);
 }
 
-/* Fin du header */
-/* Début du main */
+/* Contenu principal */
+
+main {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+/* Sections */
+
 section {
     max-width: 60%;
     max-height: 100%;
@@ -192,104 +173,70 @@ section {
 }
 
 section h2 {
-    font-family: 'Roboto Mono', monospace;
     color: rgb(188, 188, 188);
-}
-
-main {
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: hidden;
-    
-
-}
-
-/* Section Présentation */
-section h2 {
+    font-family: 'Roboto Mono', monospace;
     text-decoration: underline;
     text-decoration-thickness: 2px;
 }
 
 section p {
-    font-size: 14px;
     margin-bottom: 22px;
+    font-size: 14px;
 }
 
+/* Zone de texte défilante */
+
+.zone-lecture {
+    display: contents;
+}
+
+.accueil .zone-lecture {
+    height: 6.6rem;
+    display: block;
+    margin: 14px 0 22px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        #000 18px,
+        #000 calc(100% - 18px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0,
+        #000 18px,
+        #000 calc(100% - 18px),
+        transparent 100%
+    );
+    scrollbar-width: none;
+}
+
+.accueil .zone-lecture::-webkit-scrollbar {
+    display: none;
+}
+
+.accueil .zone-lecture p {
+    margin: 0;
+    padding: 6px 0;
+    line-height: 1.5;
+}
+
+/* Images */
+
 section img {
-    max-width: min(100%, 820px);
-    max-height: 42vh;
     width: auto;
     height: auto;
+    max-width: min(100%, 820px);
+    max-height: 42vh;
     display: block;
-    /* max-height réduit l'image quand la fenêtre est basse.
-       width:auto + height:auto évitent le cadre vide et conservent le ratio réel. */
     border: 1px solid rgba(153, 0, 0, 0.22);
     border-radius: 12px;
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
-/* Fin de la section Présentation */
-/* Liens affiches uniquement dans la section Projets */
-.projets-liens {
-    display: none;
-    width: 230px;
-    flex-direction: column;
-    gap: 14px;
-    position: relative;
-    /* Valeur simple pour regler facilement la hauteur des cartes.
-       Plus le nombre est petit, plus les cartes remontent. */
-    top: 50px;
-    /* Decale les cartes vers la gauche pour les placer entre l'image et la nav.
-       Plus le nombre est grand, plus les cartes vont vers la gauche. */
-    right: 190px;
-}
-
-.projets-liens.visible {
-    display: flex;
-    animation: fadeInUp 0.35s ease forwards;
-}
-
-.projet-lien {
-    flex: 1;
-    padding: 16px;
-    color: rgba(255, 255, 255, 0.82);
-    text-decoration: none;
-    border: 1px solid rgba(153, 0, 0, 0.45);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.03);
-    transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
-}
-
-.projet-lien:hover,
-.projet-lien:focus-visible {
-    transform: translateY(-3px);
-    border-color: rgba(153, 0, 0, 0.9);
-    background: rgba(153, 0, 0, 0.14);
-    outline: none;
-}
-
-.projet-lien strong,
-.projet-lien span {
-    display: block;
-}
-
-.projet-lien strong {
-    margin-bottom: 6px;
-    color: rgb(188, 188, 188);
-    font-family: 'Roboto Mono', monospace;
-    font-size: 14px;
-}
-
-.projet-lien span {
-    font-size: 12px;
-    line-height: 1.4;
-}
-
-/* Section barre de navigation */
+/* Navigation */
 
 nav {
     width: 146px;
@@ -302,14 +249,14 @@ nav {
 }
 
 nav ul {
+    width: 100%;
+    min-height: 220px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 18px;
-    width: 100%;
-    min-height: 220px;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 nav li {
@@ -317,10 +264,10 @@ nav li {
 }
 
 nav li a {
-    color: rgba(255, 255, 255, 0.78);
+    min-height: 34px;
     display: inline-flex;
     align-items: center;
-    min-height: 34px;
+    color: rgba(255, 255, 255, 0.78);
     font-size: 14px;
     text-decoration: none;
     transition: color 0.28s ease, transform 0.28s ease;
@@ -350,18 +297,90 @@ nav li a:focus-visible::before {
     transform: scale(1.25);
 }
 
-/* Responsive mis en pause.
-   Les media queries seront refaites plus tard, quand la version desktop sera terminee. */
+/* Projets */
 
-/* Animation de fondu enchaîné */
+.projets-liens {
+    width: 230px;
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    top: 50px;
+    right: 190px;
+}
+
+.projets-liens.visible {
+    display: flex;
+    animation: fadeInUp 0.35s ease forwards;
+}
+
+.projet-lien {
+    flex: 1;
+    padding: 16px;
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    border: 1px solid rgba(153, 0, 0, 0.45);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+}
+
+.projet-lien:hover,
+.projet-lien:focus-visible {
+    transform: translateY(-3px);
+    border-color: rgba(153, 0, 0, 0.9);
+    background: rgba(153, 0, 0, 0.14);
+    outline: none;
+}
+
+.projet-lien strong {
+    display: block;
+    margin-bottom: 6px;
+    color: rgb(188, 188, 188);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 14px;
+}
+
+.projet-lien span {
+    display: block;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Animations */
+
+@keyframes color {
+    0% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
+
 @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeInUp {
