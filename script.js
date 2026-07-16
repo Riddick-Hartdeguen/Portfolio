@@ -1,27 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // ==============================
-    // 1. Images a precharger
-    // ==============================
-    // Cette liste sert uniquement a charger les images importantes avant les clics.
-    // Comme ca, le navigateur les connait deja quand on change de section.
-    const imagesAPrecharger = [
-        'images/villedenuit1.jpg',
-        'images/competences-v2.png',
-        'images/liberté.jpg'
-    ];
+    // ==================================================
+    // 1. ÉLÉMENTS HTML UTILISÉS PAR LE JAVASCRIPT
+    // ==================================================
 
-    imagesAPrecharger.forEach(function (sourceImage) {
-        // new Image() cree une image en JavaScript sans l'afficher dans la page.
-        // En lui donnant un src, on force simplement le navigateur a charger le fichier.
-        const imagePrechargee = new Image();
-        imagePrechargee.src = sourceImage;
-    });
-
-    // ==============================
-    // 2. Elements HTML utilises par le script
-    // ==============================
-    // On les recupere une seule fois au chargement de la page.
-    // Comme ils existent deja dans le HTML, il est inutile de les chercher a chaque clic.
+    // Ces constantes relient le JavaScript aux éléments présents dans index.html.
     const liensNavigation = document.querySelectorAll('nav ul li a');
     const sectionPrincipale = document.getElementById('section');
     const titre = document.getElementById('titreh2');
@@ -30,125 +12,160 @@ document.addEventListener('DOMContentLoaded', function () {
     const image = document.getElementById('monImage');
     const liensProjets = document.getElementById('projetsLiens');
 
-    // ==============================
-    // 3. Textes et images des sections
-    // ==============================
-    // Le texte d'accueil vient directement du HTML.
-    // Ca evite d'avoir le meme texte ecrit deux fois dans le projet.
-    const texteAccueil = paragraphe.innerHTML;
-    const imageAccueil = 'images/villedenuit1.jpg';
-    const descriptionAccueil = image.alt;
+    // ==================================================
+    // 2. CONTENU DES SECTIONS
+    // ==================================================
 
-    // Les textes plus longs sont sortis du clic pour alleger la lecture.
-    // Au moment du clic, on choisira simplement lequel afficher.
-    const texteCompetences = `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
-        en train d'apprivoiser pour construire des projets plus complets.
-        <br />
-        Je consolide les bases avec HTML, CSS et JavaScript, puis j'avance vers TypeScript, React,
-        Node.js, Express, MongoDB, Git, GitHub et les outils liés à l'IA comme Codex.`;
+    const contenuAccueil = {
+        titre: 'Bienvenue',
+        texte: paragraphe.innerHTML,
+        sourceImage: 'images/villedenuit1.jpg',
+        descriptionImage: image.alt
+    };
 
-    const texteProjets = `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
-        deviennent des interfaces, des essais, puis de vraies réalisations.
-        <br />
-        Chaque projet me permet de pratiquer, de corriger mes erreurs et de montrer mon évolution en tant
-        que développeur web, étape par étape.`;
+    const contenuCompetences = {
+        titre: 'Compétences',
+        texte: `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
+            en train d'apprivoiser pour construire des projets plus complets.
+            <br />
+            Je consolide les bases avec HTML, CSS et JavaScript, puis j'avance vers TypeScript, React,
+            Node.js, Express, MongoDB, Git, GitHub et les outils liés à l'IA comme Codex.`,
+        sourceImage: 'images/competences-v2.png',
+        descriptionImage: 'Logos des compétences web, full stack et IA'
+    };
 
-    // ==============================
-    // 4. Clics sur la navigation
-    // ==============================
-    liensNavigation.forEach(function (lien) {
-        lien.addEventListener('click', function (event) {
-            event.preventDefault();
+    const contenuProjets = {
+        titre: 'Projets',
+        texte: `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
+            deviennent des interfaces, des essais, puis de vraies réalisations.
+            <br />
+            Chaque projet me permet de pratiquer, de corriger mes erreurs et de montrer mon évolution en tant
+            que développeur web, étape par étape.`,
+        sourceImage: 'images/liberté.jpg',
+        descriptionImage: 'Image de présentation des projets'
+    };
 
-            const section = lien.textContent.trim();
+    // Cet objet permet de retrouver un contenu grâce au nom du lien cliqué.
+    const contenusParSection = {
+        Accueil: contenuAccueil,
+        Compétences: contenuCompetences,
+        Projets: contenuProjets
+    };
 
-            // Dans la nav, "Accueil" est plus naturel.
-            // A l'ecran, on garde "Bienvenue" comme titre de la premiere section.
-            let texteTitre = section;
+    // ==================================================
+    // 3. FONCTION : PRÉCHARGER LES IMAGES
+    // ==================================================
 
-            if (section === 'Accueil') {
-                texteTitre = 'Bienvenue';
-            }
+    // Le navigateur charge les images à l'avance pour les afficher rapidement au clic.
+    function prechargerImages() {
+        const sourcesImages = [
+            contenuAccueil.sourceImage,
+            contenuCompetences.sourceImage,
+            contenuProjets.sourceImage
+        ];
 
-            // Par defaut, on prepare le contenu de l'accueil.
-            // Si la section cliquee est differente, les if / else juste en dessous remplacent ces valeurs.
-            let texteParagraphe = texteAccueil;
-            let sourceImage = imageAccueil;
-            let descriptionImage = descriptionAccueil;
+        sourcesImages.forEach(function (sourceImage) {
+            const imagePrechargee = new Image();
+            imagePrechargee.src = sourceImage;
+        });
+    }
 
-            // Chaque section garde un contenu simple : un titre, un court texte et une image.
-            // Cela permet de comprendre facilement ce qui change au clic dans la navigation.
-            if (section === 'Compétences') {
-                texteParagraphe = texteCompetences;
-                sourceImage = 'images/competences-v2.png';
-                descriptionImage = 'Logos des compétences web, full stack et IA';
-            } else if (section === 'Projets') {
-                texteParagraphe = texteProjets;
-                sourceImage = 'images/liberté.jpg';
-                descriptionImage = 'Image de présentation des projets';
-            }
+    // ==================================================
+    // 4. FONCTION : AFFICHER OU CACHER LES PROJETS
+    // ==================================================
 
-            // Le bloc de liens projets n'a de sens que dans la section Projets.
-            // Sur Accueil et Competences, on le cache pour garder une page plus simple.
-            if (section === 'Projets') {
-                liensProjets.classList.add('visible');
-            } else {
-                liensProjets.classList.remove('visible');
-            }
+    // La classe "visible" est présente uniquement quand la section Projets est choisie.
+    function mettreAJourLiensProjets(nomSection) {
+        const afficherProjets = nomSection === 'Projets';
+        liensProjets.classList.toggle('visible', afficherProjets);
+    }
 
-            // Cette valeur sera utilisée après le fondu, en même temps que le nouveau texte.
-            // Cela évite que le long texte d'accueil change brièvement la hauteur de la section.
-            const estAccueil = section === 'Accueil';
+    // ==================================================
+    // 5. FONCTION : ANIMER LE TITRE ET LE TEXTE
+    // ==================================================
 
-            // Ajouter la classe fade-out au titre
-            titre.classList.add('fade-out');
+    // Le titre disparaît, le contenu change, puis le titre réapparaît.
+    function animerTitreEtTexte(contenu, estAccueil) {
+        titre.classList.add('fade-out');
+        paragraphe.classList.add('fade-out');
 
-            // Attendre la fin de l'animation fade-out avant de changer le texte et d'ajouter fade-in
-            titre.addEventListener('animationend', function handleTitleAnimationEnd() {
-                titre.textContent = texteTitre;
-                paragraphe.innerHTML = texteParagraphe;
+        titre.addEventListener('animationend', function terminerDisparition() {
+            titre.textContent = contenu.titre;
+            paragraphe.innerHTML = contenu.texte;
+            sectionPrincipale.classList.toggle('accueil', estAccueil);
+            zoneLecture.scrollTop = 0;
+            titre.classList.remove('fade-out');
+            paragraphe.classList.remove('fade-out');
+            titre.classList.add('fade-in');
+            paragraphe.classList.add('fade-in');
 
-                // Le texte et sa mise en page changent ensemble une fois le fondu terminé.
-                // Il n'existe donc plus d'instant où le texte d'accueil est affiché sans sa zone fixe.
-                sectionPrincipale.classList.toggle('accueil', estAccueil);
-                zoneLecture.scrollTop = 0;
+            titre.addEventListener('animationend', function terminerApparition() {
+                titre.classList.remove('fade-in');
+                paragraphe.classList.remove('fade-in');
+            }, { once: true });
+        }, { once: true });
+    }
 
-                // Retirer la classe fade-out et ajouter la classe fade-in
-                titre.classList.remove('fade-out');
-                titre.classList.add('fade-in');
+    // ==================================================
+    // 6. FONCTION : ANIMER LE CHANGEMENT D'IMAGE
+    // ==================================================
 
-                // Retirer la classe fade-in après l'animation
-                titre.addEventListener('animationend', function removeTitleFadeIn() {
-                    titre.classList.remove('fade-in');
-                    titre.removeEventListener('animationend', removeTitleFadeIn);
-                });
+    // Une image temporaire vérifie que le fichier est chargé avant de l'afficher.
+    function animerImage(contenu) {
+        image.classList.remove('fade-in', 'fade-out');
+        image.classList.add('fade-out');
 
-                titre.removeEventListener('animationend', handleTitleAnimationEnd);
+        setTimeout(function () {
+            const nouvelleImage = new Image();
+
+            nouvelleImage.addEventListener('load', function () {
+                image.src = contenu.sourceImage;
+                image.alt = contenu.descriptionImage;
+                image.classList.remove('fade-out');
+                image.classList.add('fade-in');
+
+                setTimeout(function () {
+                    image.classList.remove('fade-in');
+                }, 300);
             });
 
-            // On retire d'abord les anciennes classes pour repartir d'une animation propre.
-            image.classList.remove('fade-in', 'fade-out');
-            image.classList.add('fade-out');
+            nouvelleImage.src = contenu.sourceImage;
+        }, 300);
+    }
 
-            setTimeout(function () {
-                // Cette image temporaire sert a verifier que le nouveau fichier est charge
-                // avant de l'afficher dans la vraie balise <img>.
-                const nouvelleImage = new Image();
+    // ==================================================
+    // 7. FONCTION : GÉRER UN CLIC DANS LA NAVIGATION
+    // ==================================================
 
-                nouvelleImage.addEventListener('load', function () {
-                    image.src = sourceImage;
-                    image.alt = descriptionImage;
+    // Cette fonction coordonne les petites fonctions précédentes après un clic.
+    function gererClicNavigation(event) {
+        event.preventDefault();
 
-                    image.classList.remove('fade-out');
-                    image.classList.add('fade-in');
+        const lienClique = event.currentTarget;
+        const nomSection = lienClique.textContent.trim();
+        const contenu = contenusParSection[nomSection];
 
-                    setTimeout(function () {
-                        image.classList.remove('fade-in');
-                    }, 300);
-                });
+        // Cette vérification évite une erreur si un lien inconnu est ajouté à la navigation.
+        if (!contenu) {
+            console.error(`Aucun contenu trouvé pour la section : ${nomSection}`);
+            return;
+        }
 
-                nouvelleImage.src = sourceImage;
-            }, 300);
-        });
+        const estAccueil = nomSection === 'Accueil';
+
+        mettreAJourLiensProjets(nomSection);
+        animerTitreEtTexte(contenu, estAccueil);
+        animerImage(contenu);
+    }
+
+    // ==================================================
+    // 8. DÉMARRAGE DU JAVASCRIPT
+    // ==================================================
+
+    prechargerImages();
+
+    // Chaque lien de navigation déclenche la même fonction lors d'un clic.
+    liensNavigation.forEach(function (lien) {
+        lien.addEventListener('click', gererClicNavigation);
     });
 });
