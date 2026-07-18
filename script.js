@@ -1,171 +1,73 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // ==================================================
-    // 1. ÉLÉMENTS HTML UTILISÉS PAR LE JAVASCRIPT
-    // ==================================================
 
-    // Ces constantes relient le JavaScript aux éléments présents dans index.html.
-    const liensNavigation = document.querySelectorAll('nav ul li a');
-    const sectionPrincipale = document.getElementById('section');
-    const titre = document.getElementById('titreh2');
-    const paragraphe = document.getElementById('textep');
-    const zoneLecture = document.querySelector('.zone-lecture');
-    const image = document.getElementById('monImage');
-    const liensProjets = document.getElementById('projetsLiens');
+// // Déclaration des objets
 
-    // ==================================================
-    // 2. CONTENU DES SECTIONS
-    // ==================================================
+const accueil = {
+  titre: "Bienvenue sur mon portfolio",
+  texte: `Après plus de vingt ans de carrière dans l'armée, dont douze passés au sein des unités spéciales, j'ai choisi de me reconvertir dans le développement web.<br>
+						Au cours de mon parcours militaire, j'ai appris à évoluer dans des environnements exigeants où la rigueur, l'autonomie, l'esprit d'équipe et l'adaptation sont essentiels.<br> Aujourd'hui, je mets ces qualités au service de mon nouveau projet professionnel.
+						Je me forme actuellement au développement web full stack et prépare une alternance en Conception et Développement d'Applications (CDA).<br>
+						Ce portfolio retrace ma progression à travers les projets que je réalise. Au-delà du résultat, j'accorde une importance particulière à la compréhension du code, à la qualité des réalisations et à une progression constante.`,
+  image: 'images/villedenuit1.jpg',
+  afficherProjets: false
+};
 
-    const contenuAccueil = {
-        titre: 'Bienvenue',
-        texte: paragraphe.innerHTML,
-        sourceImage: 'images/villedenuit1.jpg',
-        descriptionImage: image.alt
-    };
-
-    const contenuCompetences = {
-        titre: 'Compétences',
-        texte: `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
+const competences = {
+  titre: "Mes compétences",
+  texte: `Mes compétences représentent les outils que j'utilise aujourd'hui et ceux que je suis
             en train d'apprivoiser pour construire des projets plus complets.
             <br />
             Je consolide les bases avec HTML, CSS et JavaScript, puis j'avance vers TypeScript, React,
             Node.js, Express, MongoDB, Git, GitHub et les outils liés à l'IA comme Codex.`,
-        sourceImage: 'images/competences-v2.png',
-        descriptionImage: 'Logos des compétences web, full stack et IA'
-    };
+  image: 'images/competences-v2.png',
+  afficherProjets: false
+};
 
-    const contenuProjets = {
-        titre: 'Projets',
-        texte: `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
+const projets = {
+  titre: "Mes projets",
+  texte: `Mes projets sont la partie concrète de mon apprentissage : c'est ici que les idées
             deviennent des interfaces, des essais, puis de vraies réalisations.
             <br />
             Chaque projet me permet de pratiquer, de corriger mes erreurs et de montrer mon évolution en tant
             que développeur web, étape par étape.`,
-        sourceImage: 'images/liberté.jpg',
-        descriptionImage: 'Image de présentation des projets'
-    };
+  image: 'images/liberté.jpg',
+  afficherProjets: true
+};
 
-    // Cet objet permet de retrouver un contenu grâce au nom du lien cliqué.
-    const contenusParSection = {
-        Accueil: contenuAccueil,
-        Compétences: contenuCompetences,
-        Projets: contenuProjets
-    };
+// Fonction qui change le contenu
 
-    // ==================================================
-    // 3. FONCTION : PRÉCHARGER LES IMAGES
-    // ==================================================
+function changerContenu(contenu) {
 
-    // Le navigateur charge les images à l'avance pour les afficher rapidement au clic.
-    function prechargerImages() {
-        const sourcesImages = [
-            contenuAccueil.sourceImage,
-            contenuCompetences.sourceImage,
-            contenuProjets.sourceImage
-        ];
+  const titre = document.getElementById("titreh2");
+  const paragraphe = document.getElementById("textep");
+  const image = document.getElementById("monImage");
+  const blocsProjets = document.getElementById("projetsLiens");
 
-        sourcesImages.forEach(function (sourceImage) {
-            const imagePrechargee = new Image();
-            imagePrechargee.src = sourceImage;
-        });
-    }
+  titre.textContent = contenu.titre;
+  paragraphe.innerHTML = contenu.texte;
+  image.src = contenu.image;
+  image.alt = `Illustration de ${contenu.titre}`;
+  
+  if (contenu.afficherProjets) {
+  blocsProjets.classList.add("visible");
+  } else {
+  blocsProjets.classList.remove("visible");
+  }
+}
 
-    // ==================================================
-    // 4. FONCTION : AFFICHER OU CACHER LES PROJETS
-    // ==================================================
+// appel de la fonction pour afficher l'accueil au chargement de la page
 
-    // La classe "visible" est présente uniquement quand la section Projets est choisie.
-    function mettreAJourLiensProjets(nomSection) {
-        const afficherProjets = nomSection === 'Projets';
-        liensProjets.classList.toggle('visible', afficherProjets);
-    }
+changerContenu(accueil);
 
-    // ==================================================
-    // 5. FONCTION : ANIMER LE TITRE ET LE TEXTE
-    // ==================================================
+// Menu burger
 
-    // Le titre disparaît, le contenu change, puis le titre réapparaît.
-    function animerTitreEtTexte(contenu, estAccueil) {
-        titre.classList.add('fade-out');
-        paragraphe.classList.add('fade-out');
+const boutonBurger = document.getElementById("menuBurger");
+const navigationMobile = document.getElementById("menuNavigation");
 
-        titre.addEventListener('animationend', function terminerDisparition() {
-            titre.textContent = contenu.titre;
-            paragraphe.innerHTML = contenu.texte;
-            sectionPrincipale.classList.toggle('accueil', estAccueil);
-            zoneLecture.scrollTop = 0;
-            titre.classList.remove('fade-out');
-            paragraphe.classList.remove('fade-out');
-            titre.classList.add('fade-in');
-            paragraphe.classList.add('fade-in');
+// Ajoute ou retire la classe qui affiche le menu mobile.
+boutonBurger.addEventListener("click", () => {
+  navigationMobile.classList.toggle("ouvert");
+});
 
-            titre.addEventListener('animationend', function terminerApparition() {
-                titre.classList.remove('fade-in');
-                paragraphe.classList.remove('fade-in');
-            }, { once: true });
-        }, { once: true });
-    }
-
-    // ==================================================
-    // 6. FONCTION : ANIMER LE CHANGEMENT D'IMAGE
-    // ==================================================
-
-    // Une image temporaire vérifie que le fichier est chargé avant de l'afficher.
-    function animerImage(contenu) {
-        image.classList.remove('fade-in', 'fade-out');
-        image.classList.add('fade-out');
-
-        setTimeout(function () {
-            const nouvelleImage = new Image();
-
-            nouvelleImage.addEventListener('load', function () {
-                image.src = contenu.sourceImage;
-                image.alt = contenu.descriptionImage;
-                image.classList.remove('fade-out');
-                image.classList.add('fade-in');
-
-                setTimeout(function () {
-                    image.classList.remove('fade-in');
-                }, 300);
-            });
-
-            nouvelleImage.src = contenu.sourceImage;
-        }, 300);
-    }
-
-    // ==================================================
-    // 7. FONCTION : GÉRER UN CLIC DANS LA NAVIGATION
-    // ==================================================
-
-    // Cette fonction coordonne les petites fonctions précédentes après un clic.
-    function gererClicNavigation(event) {
-        event.preventDefault();
-
-        const lienClique = event.currentTarget;
-        const nomSection = lienClique.textContent.trim();
-        const contenu = contenusParSection[nomSection];
-
-        // Cette vérification évite une erreur si un lien inconnu est ajouté à la navigation.
-        if (!contenu) {
-            console.error(`Aucun contenu trouvé pour la section : ${nomSection}`);
-            return;
-        }
-
-        const estAccueil = nomSection === 'Accueil';
-
-        mettreAJourLiensProjets(nomSection);
-        animerTitreEtTexte(contenu, estAccueil);
-        animerImage(contenu);
-    }
-
-    // ==================================================
-    // 8. DÉMARRAGE DU JAVASCRIPT
-    // ==================================================
-
-    prechargerImages();
-
-    // Chaque lien de navigation déclenche la même fonction lors d'un clic.
-    liensNavigation.forEach(function (lien) {
-        lien.addEventListener('click', gererClicNavigation);
-    });
+navigationMobile.addEventListener("click", () => {
+  navigationMobile.classList.remove("ouvert");
 });

@@ -19,7 +19,9 @@
 		<div class="row">
 			<header>
 				<div class="titre">
-					<h1>Jonathan Fradet</h1>
+					<!-- Le CSS affiche le nom complet sur ordinateur et les initiales sur mobile. -->
+					<h1 class="nom-complet">Jonathan Fradet</h1>
+					<h1 class="initiales">J.F.</h1>
 					<p>Développeur web en formation · Recherche d'une alternance en CDA</p>
 				</div>
 				<div class="contact">
@@ -30,38 +32,51 @@
 					<a href="mailto:johns.over.jf82@gmail.com"><img src="images/email.png" alt="icone email" /></a>
 
 				</div>
+				<!-- Menu burger -->
+				<button id="menuBurger" class="menu-burger" type="button" aria-label="Ouvrir ou fermer le menu"
+					aria-controls="menuNavigation">
+					<span></span>
+					<span></span>
+					<span></span>
+				</button>
 			</header>
 
 			<main>
 				<section id="section" class="accueil">
 					<h2 id="titreh2">Bienvenue</h2>
-					<!-- Cette div permet au texte de défiler sans pousser l'image. -->
+					<!--Permet au texte de défiler. -->
 					<div class="zone-lecture">
-						<p id="textep">Après plus de vingt ans de carrière dans l'armée, dont douze passés au sein des unités spéciales, j'ai choisi de me reconvertir dans le développement web.<br>
-						Au cours de mon parcours militaire, j'ai appris à évoluer dans des environnements exigeants où la rigueur, l'autonomie, l'esprit d'équipe et l'adaptation sont essentiels.<br> Aujourd'hui, je mets ces qualités au service de mon nouveau projet professionnel.
-						Je me forme actuellement au développement web full stack et prépare une alternance en Conception et Développement d'Applications (CDA).<br>
-						Ce portfolio retrace ma progression à travers les projets que je réalise. Au-delà du résultat, j'accorde une importance particulière à la compréhension du code, à la qualité des réalisations et à une progression constante.
-						</p>
+						<p id="textep"></p>
 					</div>
 					<img id="monImage" src="/images/villedenuit1.jpg" alt="Ville de nuit">
 				</section>
-				<!-- Ce bloc est place entre la section principale et la nav.
-				     JavaScript l'affiche uniquement quand l'utilisateur clique sur Projets. -->
+				<!--Affiche uniquement quand l'utilisateur clique sur Projets. -->
 				<div id="projetsLiens" class="projets-liens">
 					<a class="projet-lien" href="#">
 						<strong>Les Terres Australes</strong>
 						<span>Voir le site web</span>
 					</a>
-					<a class="projet-lien" href="#">
-						<strong>SaaS budget</strong>
-						<span>Projet gestion de budget</span>
-					</a>
+					<div class="projet-en-cours">
+						<a class="projet-lien" href="#">
+							<strong>Quantis Smart money management </strong>
+							<span>Saas gestion de budget</span>
+						</a>
+						<div class="projet-ligne" aria-hidden="true"></div>
+						<aside class="projet-info">
+							<strong>Projet en cours</strong>
+							<span>Développement d’un MVP d’application de gestion de budget.</span>
+							<span>HTML, CSS, Réact, Node.js et Express</span>
+							<span>Première version prochainement disponible</span>
+						</aside>
+					</div>
 				</div>
-				<nav>
+				<nav id="menuNavigation">
 					<ul>
-						<li><a href= "#" >Accueil</a></li>
-						<li><a href="#">Compétences</a></li>
-						<li><a href="#">Projets</a></li>
+						<li><a href= "#" onclick="changerContenu(accueil); return false;">Accueil</a></li>
+						<li>
+							<a href="#" onclick="changerContenu(competences); return false;">Compétences</a>
+						</li>
+						<li><a href="#" onclick="changerContenu(projets); return false;">Projets</a></li>
 					</ul>
 				</nav>
 			</main>
