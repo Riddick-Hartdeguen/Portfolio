@@ -32,31 +32,81 @@ const projets = {
   image: 'images/liberté.jpg',
   afficherProjets: true
 };
+const sourcesImages = [ accueil.image, competences.image, projets.image];
+
+function prechargerImages() {
+
+  sourcesImages.forEach((sourceImage) => {
+    const imagePrechargee = new Image();
+    imagePrechargee.src = sourceImage;
+  });
+
+}
 
 // Fonction qui change le contenu
 
-function changerContenu(contenu) {
+function changerContenu(contenu, premierAffichage) {
 
   const titre = document.getElementById("titreh2");
   const paragraphe = document.getElementById("textep");
   const image = document.getElementById("monImage");
   const blocsProjets = document.getElementById("projetsLiens");
+  const elementsAnimes = [titre, paragraphe, image];
 
-  titre.textContent = contenu.titre;
-  paragraphe.innerHTML = contenu.texte;
-  image.src = contenu.image;
-  image.alt = `Illustration de ${contenu.titre}`;
-  
-  if (contenu.afficherProjets) {
-  blocsProjets.classList.add("visible");
-  } else {
-  blocsProjets.classList.remove("visible");
+  function mettreAJourContenu() {
+    titre.innerHTML = contenu.titre;
+    paragraphe.innerHTML = contenu.texte;
+    image.src = contenu.image;
+    image.alt = `Illustration de ${contenu.titre}`;
   }
+
+  if (premierAffichage) {
+
+  mettreAJourContenu();
+  
+  elementsAnimes.forEach((element) => {
+      element.classList.add("fade-in");
+    });
+
+  } else {
+
+  elementsAnimes.forEach((element) => {
+      element.classList.remove("fade-in");
+      element.classList.add("fade-out");
+    });
+
+  // Attente la fin de l'animation avant de changer le contenu
+
+  if (!contenu.afficherProjets) {
+  blocsProjets.classList.add("cache-projets");
+
+  setTimeout(() => {
+    blocsProjets.classList.remove("visible");
+    blocsProjets.classList.remove("cache-projets");
+  }, 300);
 }
 
-// appel de la fonction pour afficher l'accueil au chargement de la page
+  setTimeout(() => {
+    mettreAJourContenu();
 
-changerContenu(accueil);
+  // Le bloc Projets commence son fade-in en même temps que l'image.
+  if (contenu.afficherProjets) {
+    blocsProjets.classList.add("visible");
+  }
+
+  elementsAnimes.forEach((element) => {
+        element.classList.remove("fade-out");
+        element.classList.add("fade-in");
+      });
+  }, 300);
+ }
+
+}
+
+// appel des fonctions pour charger les images et afficher le contenu initial
+
+prechargerImages();
+changerContenu(accueil, true);
 
 // Menu burger
 
@@ -69,5 +119,7 @@ boutonBurger.addEventListener("click", () => {
 });
 
 navigationMobile.addEventListener("click", () => {
-  navigationMobile.classList.remove("ouvert");
+  setTimeout(() => {
+    navigationMobile.classList.remove("ouvert");
+  }, 300);
 });

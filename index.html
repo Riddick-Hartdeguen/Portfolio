@@ -43,16 +43,16 @@
 
 			<main>
 				<section id="section" class="accueil">
-					<h2 id="titreh2">Bienvenue</h2>
+					<h2 id="titreh2"></h2>
 					<!--Permet au texte de défiler. -->
 					<div class="zone-lecture">
 						<p id="textep"></p>
 					</div>
-					<img id="monImage" src="/images/villedenuit1.jpg" alt="Ville de nuit">
+					<img id="monImage" alt="">
 				</section>
 				<!--Affiche uniquement quand l'utilisateur clique sur Projets. -->
 				<div id="projetsLiens" class="projets-liens">
-					<a class="projet-lien" href="#">
+					<a  class="projet-lien" href="https://sous-le-ciel-austral.fr/" target="_blank" rel="noopener noreferrer">
 						<strong>Les Terres Australes</strong>
 						<span>Voir le site web</span>
 					</a>
@@ -72,16 +72,17 @@
 				</div>
 				<nav id="menuNavigation">
 					<ul>
-						<li><a href= "#" onclick="changerContenu(accueil); return false;">Accueil</a></li>
+						<li><a href= "#" onclick="changerContenu(accueil,false); return false;">Accueil</a></li>
 						<li>
-							<a href="#" onclick="changerContenu(competences); return false;">Compétences</a>
+							<a href="#" onclick="changerContenu(competences,false); return false;">Compétences</a>
 						</li>
-						<li><a href="#" onclick="changerContenu(projets); return false;">Projets</a></li>
+						<li><a href="#" onclick="changerContenu(projets,false); return false;">Projets</a></li>
 					</ul>
 				</nav>
 			</main>
 			<footer>
-
+				<!-- Information légale discrète affichée en bas de la page. -->
+				<p>© 2026 Jonathan Fradet. Tous droits réservés.</p>
 			</footer>
 		</div>
 
