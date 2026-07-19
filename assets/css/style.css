@@ -158,6 +158,19 @@ header {
     filter: opacity(100%);
 }
 
+.contact .contact-cv {
+    color: rgba(255, 255, 255, 0.72);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.contact .contact-cv:hover,
+.contact .contact-cv:focus-visible {
+    color: #ffffff;
+}
+
 /* Contenu principal */
 
 main {
