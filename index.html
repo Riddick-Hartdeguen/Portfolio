@@ -1,42 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr" class="css-loading">
+<html lang="fr">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Ce style minimal empêche l'affichage du HTML brut avant le chargement du CSS principal. -->
-	<style>
-		html {
-			background: #000000;
-		}
-
-		html.css-loading body {
-			visibility: hidden;
-		}
-	</style>
-	<link id="feuilleStylePrincipale" rel="stylesheet" href="./assets/css/style.css" />
-	<script>
-		(() => {
-			const racinePage = document.documentElement;
-			const feuilleStyle = document.getElementById("feuilleStylePrincipale");
-			const afficherPage = () => racinePage.classList.remove("css-loading");
-
-			if (feuilleStyle.sheet) {
-				afficherPage();
-			} else {
-				feuilleStyle.addEventListener("load", afficherPage, { once: true });
-				feuilleStyle.addEventListener("error", afficherPage, { once: true });
-				setTimeout(afficherPage, 3000);
-			}
-		})();
-	</script>
-	<noscript>
-		<style>
-			html.css-loading body {
-				visibility: visible;
-			}
-		</style>
-	</noscript>
+	<!-- La feuille de style principale est chargée dans le head pour être appliquée avant l'affichage de la page. -->
+	<link rel="stylesheet" href="./assets/css/style.css" />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&family=Roboto+Mono:wght@500&display=swap"
@@ -63,7 +32,7 @@
 							alt="icone github" /></a>
 					<!-- L'icône WebP conserve la transparence du PNG tout en réduisant son poids. -->
 					<a href="mailto:johns.over.jf82@gmail.com"><img src="images/email.webp" alt="icone email" /></a>
-					<a class="contact-cv" href="documents/CV_Jonathan_Fradet_GitHub.pdf" target="_blank"
+					<a class="contact-cv" href="documents/CV_Jonathan_Fradet_Developpeur_Web.pdf" target="_blank"
 						rel="noopener noreferrer" aria-label="Consulter le CV de Jonathan Fradet">CV</a>
 				</div>
 				<!-- Menu burger -->
