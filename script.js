@@ -34,19 +34,21 @@ const projets = {
   afficherProjets: true
 };
 const sourcesImages = [ accueil.image, competences.image, projets.image];
+const imagesPrechargees = [];
 
 function prechargerImages() {
 
   sourcesImages.forEach((sourceImage) => {
     const imagePrechargee = new Image();
     imagePrechargee.src = sourceImage;
+    imagesPrechargees.push(imagePrechargee);
   });
 
 }
 
 // Fonction qui change le contenu
 
-function changerContenu(contenu, premierAffichage) {
+async function changerContenu(contenu, premierAffichage) {
 
   const titre = document.getElementById("titreh2");
   const paragraphe = document.getElementById("textep");
@@ -54,16 +56,21 @@ function changerContenu(contenu, premierAffichage) {
   const blocsProjets = document.getElementById("projetsLiens");
   const elementsAnimes = [titre, paragraphe, image];
 
-  function mettreAJourContenu() {
+  async function mettreAJourContenu() {
     titre.innerHTML = contenu.titre;
     paragraphe.innerHTML = contenu.texte;
     image.src = contenu.image;
     image.alt = `Illustration de ${contenu.titre}`;
+    try {
+      await image.decode();
+    } catch (error) {
+      console.error(`Image impossible à charger : ${contenu.image}`, error);
+    }
   }
 
   if (premierAffichage) {
 
-  mettreAJourContenu();
+  await mettreAJourContenu();
   
   elementsAnimes.forEach((element) => {
       element.classList.add("fade-in");
@@ -87,8 +94,8 @@ function changerContenu(contenu, premierAffichage) {
   }, 300);
 }
 
-  setTimeout(() => {
-    mettreAJourContenu();
+  setTimeout(async () => {
+    await mettreAJourContenu();
 
   // Le bloc Projets commence son fade-in en même temps que l'image.
   if (contenu.afficherProjets) {
