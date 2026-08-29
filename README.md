@@ -69,6 +69,8 @@ Portfolio/
 ├── assets/
 │   └── css/
 │       └── style.css
+├── documents/
+│   └── CV_Jonathan_Fradet_Developpeur_Web.pdf
 └── images/
 ```
 
